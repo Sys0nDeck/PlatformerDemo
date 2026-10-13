@@ -3,9 +3,8 @@ using UnityEngine;
 
 namespace PlatformerDemo
 {
-    public class NPCController : MonoBehaviour
+    public class Enemy : MonoBehaviour
     {
-        [SerializeField] private Enemy _enemy;
         [SerializeField] private Mover _mover;
         [SerializeField] private Rotator _rotator;
         [SerializeField] private WaypointRouter _router;
@@ -26,7 +25,7 @@ namespace PlatformerDemo
 
         private void Move()
         {
-            _mover.Move(_currentTargetPosition, _enemy.Speed);
+            _mover.Move(_currentTargetPosition);
         }
 
         private void Rotate()
@@ -39,7 +38,6 @@ namespace PlatformerDemo
         {
             _currentTargetPosition = new Vector3(targetPosition.x, transform.position.y, 0f);
         }
-
     }
 }
 

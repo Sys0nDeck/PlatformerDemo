@@ -137,7 +137,6 @@ GameObject:
   - component: {fileID: 3826692773406537589}
   - component: {fileID: 8270464068556886654}
   - component: {fileID: 659336722249312719}
-  - component: {fileID: 3112145371380911171}
   - component: {fileID: 5507666724282267111}
   m_Layer: 0
   m_Name: Enemy
@@ -236,7 +235,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 736a6da3a0bf13d4c934fc58ebdcdaab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1.5
+  _mover: {fileID: 3826692773406537589}
+  _rotator: {fileID: 8270464068556886654}
+  _router: {fileID: 659336722249312719}
 --- !u!114 &3826692773406537589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903004d1e02f1184681c402c35e93727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 0
 --- !u!114 &8270464068556886654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,22 +277,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waypointContainer: {fileID: 0}
   _distanceDetector: {fileID: 5507666724282267111}
---- !u!114 &3112145371380911171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8485631287243445648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ca868ca4afc0cb448e0221c4f42ddaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemy: {fileID: 3171721113361774027}
-  _mover: {fileID: 3826692773406537589}
-  _rotator: {fileID: 8270464068556886654}
-  _router: {fileID: 659336722249312719}
 --- !u!114 &5507666724282267111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,4 +289,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e30dc0b7ab372474ab5d684b2b43c86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minDistanceToTarget: 0.2
+  _threshold: 0.2

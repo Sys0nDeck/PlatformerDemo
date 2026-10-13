@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace PlatformerDemo.Movement
@@ -6,36 +7,24 @@ namespace PlatformerDemo.Movement
     public class Jumper : MonoBehaviour
     {
         [SerializeField] private GroundDetector _groundDetector;
-        [SerializeField] private IdleDetector _idleDetector;
+        [SerializeField] private PhysicalRestDetector _restDetector;
+        [SerializeField] private float _jumpPower;
+
         private Rigidbody2D _rigitbody;
-        private bool _canJump;
 
         private void Awake()
         {
             _rigitbody = GetComponent<Rigidbody2D>();
         }
 
-        private void OnEnable()
+        public void Jump()
         {
-            _idleDetector.IdleStateChanged += SetJumpState;
+            if (IsJumpAvaiable())
+                _rigitbody.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);  
         }
 
-        private void OnDisable()
-        {
-            _idleDetector.IdleStateChanged -= SetJumpState;
-        }
-
-        public void Jump(float power)
-        {
-            if (_canJump)
-            {
-                _canJump = false;
-                _rigitbody.AddForce(Vector2.up * power, ForceMode2D.Impulse);
-            } 
-        }
-
-        private void SetJumpState(bool idleState)
-            => _canJump = idleState;
+        private bool IsJumpAvaiable()
+            => _groundDetector.IsContact() && _restDetector.IsResting();
     }
 }
 

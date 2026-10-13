@@ -4,4 +4,3 @@ namespace PlatformerDemo
 {
     public class Ground : MonoBehaviour { }
 }
-

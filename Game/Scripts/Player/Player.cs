@@ -1,14 +1,12 @@
 using PlatformerDemo.Movement;
-using System;
 using UnityEngine;
 
 namespace PlatformerDemo
 {
-    public class PlayerController : MonoBehaviour
+    public class Player : MonoBehaviour
     {
         [SerializeField] private UserInputListener _input;
-        [SerializeField] private InputEventDispatcher _actionManager;
-        [SerializeField] private Hero _hero;
+        [SerializeField] private InputEventDispatcher _inputEventDispatcher;
         [SerializeField] private Mover _mover;
         [SerializeField] private Rotator _rotator;
         [SerializeField] private Jumper _jumper;
@@ -22,17 +20,17 @@ namespace PlatformerDemo
 
         private void OnEnable()
         {
-            _actionManager.Subscribe(PlayerAction.Jump, Jump);
+            _inputEventDispatcher.Subscribe(PlayerAction.Jump, Jump);
         }
 
         private void OnDisable()
         {
-            _actionManager.Unsubscribe(PlayerAction.Jump, Jump);
+            _inputEventDispatcher.Unsubscribe(PlayerAction.Jump, Jump);
         }
 
         private void Jump()
         {
-            _jumper.Jump(_hero.JumpPower);
+            _jumper.Jump();
         }
 
         private void Rotate(float axis)
@@ -43,7 +41,7 @@ namespace PlatformerDemo
         private void Move(float axis)
         {
             var destination = transform.position + new Vector3(axis, 0f, 0f);
-            _mover.Move(destination, _hero.Speed);
+            _mover.Move(destination);
         }
     }
 }

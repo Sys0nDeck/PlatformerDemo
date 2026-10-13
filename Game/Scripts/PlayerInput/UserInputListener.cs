@@ -4,7 +4,16 @@ namespace PlatformerDemo
 {
     public class UserInputListener : MonoBehaviour
     {
-        [SerializeField] private InputEventDispatcher _actionManager;
+        [SerializeField] private PlayerActionInitializator _playerActionInitializator;
+        [SerializeField] private InputEventDispatcher _inputActionDispatcher;
+        [SerializeField] private InputKeyData _inputKeyData;
+        [SerializeField] private Player _player;
+
+        private void Awake()
+        {
+            InitKeyActions();
+            _player.gameObject.SetActive(true);
+        }
 
         private void Update()
         {
@@ -17,9 +26,14 @@ namespace PlatformerDemo
         private void ListenPressingButton()
         {
             if (Input.anyKeyDown)
-                foreach (var key in InputKeyData.GetKeys)
+                foreach (var key in _inputKeyData.GetKeys)
                     if (Input.GetKeyDown(key))
-                        _actionManager.InvokeAction(InputKeyData.GetAction(key));
+                        _inputActionDispatcher.InvokeAction(_inputKeyData.GetAction(key));
+        }
+
+        private void InitKeyActions()
+        {
+            _playerActionInitializator.AddButtonAction(KeyCode.Space, PlayerAction.Jump);
         }
     }
 }

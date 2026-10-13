@@ -8,7 +8,6 @@ namespace PlatformerDemo.Animation
         {
             public static readonly int MoveState = Animator.StringToHash(nameof(MoveState));
             public static readonly int VerticalState = Animator.StringToHash(nameof(VerticalState));
-            public static readonly int GroundTrigger = Animator.StringToHash(nameof(GroundTrigger));
         }
     }
 }
