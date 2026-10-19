@@ -2,6 +2,7 @@ namespace PlatformerDemo
 {
     public enum PlayerAction
     {
-        Jump
+        Jump,
+        Attack
     }
 }

@@ -1,3 +1,4 @@
+using PlatformerDemo.Combat;
 using PlatformerDemo.Movement;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ namespace PlatformerDemo
         [SerializeField] private Mover _mover;
         [SerializeField] private Rotator _rotator;
         [SerializeField] private Jumper _jumper;
+        [SerializeField] private Health _health;
+        [SerializeField] private Attacker _attacker;
 
         private void Update()
         {
@@ -21,11 +24,15 @@ namespace PlatformerDemo
         private void OnEnable()
         {
             _inputEventDispatcher.Subscribe(PlayerAction.Jump, Jump);
+            _inputEventDispatcher.Subscribe(PlayerAction.Attack, Attack);
+            _health.Dead += Die;
         }
 
         private void OnDisable()
         {
             _inputEventDispatcher.Unsubscribe(PlayerAction.Jump, Jump);
+            _inputEventDispatcher.Unsubscribe(PlayerAction.Attack, Attack);
+            _health.Dead -= Die;
         }
 
         private void Jump()
@@ -42,6 +49,17 @@ namespace PlatformerDemo
         {
             var destination = transform.position + new Vector3(axis, 0f, 0f);
             _mover.Move(destination);
+        }
+
+        private void Attack()
+        {
+            _attacker.Attack();
+        }
+
+        private void Die()
+        {
+            Debug.Log("You dead");
+            gameObject.SetActive(false);
         }
     }
 }

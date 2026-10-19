@@ -1,5 +1,5 @@
+using PlatformerDemo.Combat;
 using PlatformerDemo.Movement;
-using System;
 using UnityEngine;
 
 namespace PlatformerDemo.Animation
@@ -8,17 +8,18 @@ namespace PlatformerDemo.Animation
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private Mover _mover;
+        [SerializeField] private Attacker _attaker;
 
         private void OnEnable()
         {
-            if (_mover != null)
-                _mover.MoveStateChanged += SetMoveState;
+            _mover.MoveStateChanged += SetMoveState;
+            _attaker.Attaked += TriggerAttack;
         }
 
         private void OnDisable()
         {
-            if (_mover != null)
-                _mover.MoveStateChanged -= SetMoveState;
+            _mover.MoveStateChanged -= SetMoveState;
+            _attaker.Attaked -= TriggerAttack;
         }
 
         public void SetAnimationState(int id, float stateValue)
@@ -31,11 +32,14 @@ namespace PlatformerDemo.Animation
             _animator.SetFloat(id, stateValue);
         }
 
-        public void TriggerState(int id)
-            => _animator.SetTrigger(id);
-
         private void SetMoveState(float stateValue)
             => SetAnimationState(PlayerAnimatorData.Params.MoveState, stateValue);
+
+        private void TriggerAttack()
+            => TriggerState(PlayerAnimatorData.Params.AttackTrigger);
+
+        private void TriggerState(int id)
+            => _animator.SetTrigger(id);
     }
 }
 

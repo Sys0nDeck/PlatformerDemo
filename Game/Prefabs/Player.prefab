@@ -228,7 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 956052059298095178}
   _mover: {fileID: 2127214525451993088}
-  _jumper: {fileID: 7680149351583478882}
+  _attaker: {fileID: 4318222357305639693}
 --- !u!114 &2651331037536285547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +259,9 @@ GameObject:
   - component: {fileID: 2127214525451993088}
   - component: {fileID: 7680149351583478882}
   - component: {fileID: 6175883751596073275}
+  - component: {fileID: 5144104486481852563}
+  - component: {fileID: 4318222357305639693}
+  - component: {fileID: 4601752993074358399}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -362,6 +365,8 @@ MonoBehaviour:
   _mover: {fileID: 2127214525451993088}
   _rotator: {fileID: 7702497230426336938}
   _jumper: {fileID: 7680149351583478882}
+  _health: {fileID: 5144104486481852563}
+  _attacker: {fileID: 4318222357305639693}
 --- !u!114 &7702497230426336938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,4 +420,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 1154811745390346011}
-  _currentCoins: 0
+--- !u!114 &5144104486481852563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7471690604605978276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c9a30fc0cd5c6439b539054d004ebf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
+--- !u!114 &4318222357305639693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7471690604605978276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7605e6d84af4a0146a01c847ae287806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackDamage: 30
+  _range: 1.5
+  _attackDelay: 0.5
+--- !u!114 &4601752993074358399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7471690604605978276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd85ae6f492442947a6ef92d3253059e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coinCount: 0

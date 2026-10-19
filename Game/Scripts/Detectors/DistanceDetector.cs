@@ -8,8 +8,14 @@ namespace PlatformerDemo
         [SerializeField] private float _threshold = 0.2f;
 
         private Vector3 _targetPosition;
+        private DistanceCounter _distanceCounter;
 
         public event Action TargetReached;
+
+        public void Start()
+        {
+            _distanceCounter = new DistanceCounter();
+        }
 
         private void Update()
         {
@@ -24,9 +30,10 @@ namespace PlatformerDemo
 
         private void CheckDistanceToTarget(float minDistance)
         {
-            var sqrDistance = (_targetPosition - transform.position).sqrMagnitude;
-            if (sqrDistance <= Mathf.Pow(minDistance, 2))
+            if (_distanceCounter.IsTargetReached(transform.position, _targetPosition, minDistance))
+            {
                 TargetReached?.Invoke();
+            }
         }
     }
 }

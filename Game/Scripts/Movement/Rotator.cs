@@ -8,7 +8,10 @@ namespace PlatformerDemo.Movement
 
         public void Rotate(float xAxis)
         {
-            if (xAxis == 0 && xAxis == _currentRotateState)
+            if (xAxis == 0)
+                return;
+
+            if (xAxis == _currentRotateState)
                 return;
 
             _currentRotateState = xAxis;

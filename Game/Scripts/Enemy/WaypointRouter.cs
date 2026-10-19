@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ namespace PlatformerDemo
         [SerializeField] private DistanceDetector _distanceDetector;
 
         private IEnumerator<Waypoint> _waypointEnumerator;
+
+        public event Action WaypointChanged;
 
         public Waypoint CurrentWaypoint
             => _waypointEnumerator.Current;
@@ -36,6 +39,7 @@ namespace PlatformerDemo
         private void HandleReceivedPoint()
         {
             SendWaypoint(GetNextWaypoint());
+            WaypointChanged?.Invoke();
         }
 
         private void SendWaypoint(Waypoint waypoint)

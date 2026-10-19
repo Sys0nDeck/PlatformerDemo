@@ -1,3 +1,4 @@
+using PlatformerDemo.Combat;
 using PlatformerDemo.Movement;
 using UnityEngine;
 
@@ -7,25 +8,40 @@ namespace PlatformerDemo
     {
         [SerializeField] private Mover _mover;
         [SerializeField] private Rotator _rotator;
-        [SerializeField] private WaypointRouter _router;
+        [SerializeField] private Health _health;
+        [SerializeField] private Attacker _attaker;
+        [SerializeField] private TargetSwitcher _targetSwither;
+        [SerializeField] private AttackTriggerDetector _attackTrigger;
+        [SerializeField] private GroundRayDetector _groundRayDetector;
 
         private Vector3 _currentTargetPosition;
 
-        private void Start()
+        private void OnEnable()
         {
-            _router.Launch();
+            _health.Dead += Die;
+        }
+
+        private void OnDisable()
+        {
+            _health.Dead -= Die;
         }
 
         private void Update()
         {
-            CorrectiveTarget(_router.CurrentWaypoint.transform.position);
+            CorrectiveTarget(_targetSwither.CurrentTarget.position);
             Move();
             Rotate();
+
+            if (_attackTrigger.IsTargetInRange)
+                Attack();
         }
 
         private void Move()
         {
-            _mover.Move(_currentTargetPosition);
+            if( (_attackTrigger.IsTargetInRange == false) && _groundRayDetector.IsGroundExist()) 
+                _mover.Move(_currentTargetPosition);
+            else
+                _mover.Move(transform.position);
         }
 
         private void Rotate()
@@ -34,9 +50,19 @@ namespace PlatformerDemo
             _rotator.Rotate(xAxis);
         }
 
+        private void Attack()
+        {
+            _attaker.Attack();
+        }
+
         private void CorrectiveTarget(Vector3 targetPosition)
         {
             _currentTargetPosition = new Vector3(targetPosition.x, transform.position.y, 0f);
+        }
+
+        private void Die()
+        {
+            gameObject.SetActive(false);
         }
     }
 }
