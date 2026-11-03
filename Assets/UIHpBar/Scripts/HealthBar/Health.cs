@@ -24,7 +24,7 @@ public class Health : MonoBehaviour, IDamagable
         CurrentHealth = _maxHealth;
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(float damage)
     {
         if (damage <= 0)
             return;
@@ -33,7 +33,7 @@ public class Health : MonoBehaviour, IDamagable
         Notify();
     }
 
-    public virtual void Heal(int healPoint)
+    public virtual void Heal(float healPoint)
     {
         if (healPoint <= 0)
             return;

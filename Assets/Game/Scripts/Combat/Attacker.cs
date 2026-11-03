@@ -6,7 +6,7 @@ namespace PlatformerDemo.Combat
 {
     public class Attacker : MonoBehaviour
     {
-        [SerializeField] private int _attackDamage;
+        [SerializeField] private float _attackDamage;
         [SerializeField] private float _range;
         [SerializeField] private float _attackDelay;
         [SerializeField] private float _timeBeforeDamage;

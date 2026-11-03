@@ -1,5 +1,6 @@
 using PlatformerDemo.Combat;
 using PlatformerDemo.Movement;
+using PlatformerDemo.Ability;
 using UnityEngine;
 
 namespace PlatformerDemo
@@ -12,6 +13,7 @@ namespace PlatformerDemo
         [SerializeField] private Rotator _rotator;
         [SerializeField] private Jumper _jumper;
         [SerializeField] private Attacker _attacker;
+        [SerializeField] private AbilityView _ability;
         [SerializeField] private DeadDetector _deadDetector;
 
         private void Update()
@@ -25,6 +27,7 @@ namespace PlatformerDemo
         {
             _inputEventDispatcher.Subscribe(PlayerAction.Jump, Jump);
             _inputEventDispatcher.Subscribe(PlayerAction.Attack, Attack);
+            _inputEventDispatcher.Subscribe(PlayerAction.Spell, UseSpell);
             _deadDetector.Dead += Die;
         }
 
@@ -32,6 +35,7 @@ namespace PlatformerDemo
         {
             _inputEventDispatcher.Unsubscribe(PlayerAction.Jump, Jump);
             _inputEventDispatcher.Unsubscribe(PlayerAction.Attack, Attack);
+            _inputEventDispatcher.Unsubscribe(PlayerAction.Spell, UseSpell);
             _deadDetector.Dead -= Die;
         }
 
@@ -54,6 +58,11 @@ namespace PlatformerDemo
         private void Attack()
         {
             _attacker.Attack();
+        }
+
+        private void UseSpell()
+        {
+            _ability.Activate();
         }
 
         private void Die()

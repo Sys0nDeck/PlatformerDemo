@@ -35,6 +35,7 @@ namespace PlatformerDemo
         {
             _playerActionInitializator.AddButtonAction(KeyCode.Space, PlayerAction.Jump);
             _playerActionInitializator.AddButtonAction(KeyCode.K, PlayerAction.Attack);
+            _playerActionInitializator.AddButtonAction(KeyCode.V, PlayerAction.Spell);
         }
     }
 }
